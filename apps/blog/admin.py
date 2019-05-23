@@ -7,42 +7,42 @@ from apps.blog.models import *
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['__all__']
+    list_display = ['id', 'code', 'name']
     list_per_page = 10
     list_display_links = ['id', 'code']
 
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
-    list_display = ['__all__']
+    list_display = ['id', 'code', 'name']
     list_per_page = 10
     list_display_links = ['id', 'code']
 
 
 @admin.register(Recom)
 class RecomAdmin(admin.ModelAdmin):
-    list_display = ['__all__']
+    list_display = ['id', 'code', 'name']
     list_per_page = 10
     list_display_links = ['id', 'code']
 
 
 @admin.register(Artical)
 class ArticalAdmin(admin.ModelAdmin):
-    list_display = ['__all__']
+    list_display = ['id', 'title', 'category', 'views', 'create_time']
     list_per_page = 10
     list_display_links = ['id', 'title']
 
 
 @admin.register(Banner)
 class BannerAdmin(admin.ModelAdmin):
-    list_display = ['__all__']
+    list_display = ['id', 'text_info', 'img', 'link_url', 'is_active']
     list_per_page = 10
     list_display_links = ['id', 'text_info']
 
 
 @admin.register(Link)
 class LinkAdmin(admin.ModelAdmin):
-    list_display = ['__all__']
+    list_display = ['id', 'name', 'link_url']
     list_per_page = 10
     list_display_links = ['id', 'name']
 

@@ -59,6 +59,7 @@ class Artical(models.Model):
     category = models.ForeignKey(verbose_name='分类id', to=Category, on_delete=models.DO_NOTHING, blank=True, null=True)
     tags = models.ManyToManyField(verbose_name='标签id', to=Tag, blank=True)
     img = models.ImageField(verbose_name='文章图片', upload_to='artical-img/%Y/%m', blank=True, null=True)
+    # Ueditor是百度开发的一个富文本编辑器，功能强大。用富文本编辑body
     body = UEditorField(verbose_name='内容', width=800, height=500, imagePath='up-img/', filePath='up-file/',
                         upload_settings={'imageMaxSize': 1204000}, blank=True, null=True)
     user = models.ForeignKey(verbose_name='作者id', to=User, on_delete=models.CASCADE)
@@ -85,7 +86,7 @@ class Banner(models.Model):
     is_active = models.BooleanField(verbose_name='是否可用', default=False)
 
     class Meta:
-        verbose_name = '轮播图'
+        verbose_name = '轮播图表'
         verbose_name_plural = verbose_name
 
     def __str__(self):
@@ -94,13 +95,13 @@ class Banner(models.Model):
 
 class Link(models.Model):
     """
-    友情链接
+    友情链接表
     """
     name = models.CharField(verbose_name='链接名称', max_length=20)
     link_url = models.URLField(verbose_name='网址', max_length=100)
 
     class Meta:
-        verbose_name = '友情链接'
+        verbose_name = '友情链接表'
         verbose_name_plural = verbose_name
 
     def __str__(self):
