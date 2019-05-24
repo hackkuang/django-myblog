@@ -124,10 +124,12 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
+# 多个App的静态文件配置
 STATICFILES_DIR = [
     os.path.join(BASE_DIR, 'blogapp', 'static'),
 ]
 
+# 上传文件配置
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
