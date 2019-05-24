@@ -87,7 +87,7 @@ class Banner(models.Model):
     link_url = models.URLField(verbose_name='图片链接', max_length=100)
     is_active = models.BooleanField(verbose_name='是否可用', default=False)
 
-    def is_active_color(self):
+    def link_url_color(self):
         """
         根据状态，给字段添加CSS颜色显示
         :return:
@@ -95,8 +95,8 @@ class Banner(models.Model):
         if self.is_active is True:
             f_color = 'green'
         else:
-            f_color = 'red'
-        return format_html('<span style="color: {}">{}</span>', f_color, self.is_active)
+            f_color = 'gray'
+        return format_html('<span style="color: {}">{}</span>', f_color, self.link_url)
 
     class Meta:
         verbose_name = '轮播图表'
