@@ -4,6 +4,9 @@ from django.contrib import admin
 
 from blogapp.models import *
 
+admin.site.site_title = '我的博客'
+admin.site.site_header = '汪春旺个人博客后台管理系统'
+
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):

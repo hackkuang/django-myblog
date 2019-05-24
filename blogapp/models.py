@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
+from django.utils.html import format_html
+
 from extraapps.DjangoUeditor.models import UEditorField
 
 
@@ -84,6 +86,17 @@ class Banner(models.Model):
     img = models.ImageField(verbose_name='轮播图片', upload_to='banner/')
     link_url = models.URLField(verbose_name='图片链接', max_length=100)
     is_active = models.BooleanField(verbose_name='是否可用', default=False)
+
+    def is_active_color(self):
+        """
+        根据状态，给字段添加CSS颜色显示
+        :return:
+        """
+        if self.is_active is True:
+            f_color = 'green'
+        else:
+            f_color = 'red'
+        return format_html('<span style="color: {}">{}</span>', f_color, self.is_active)
 
     class Meta:
         verbose_name = '轮播图表'
