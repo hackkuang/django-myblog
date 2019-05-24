@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.blog',
+    'blogapp',
     'extraapps.DjangoUeditor',
 ]
 
@@ -125,7 +125,7 @@ USE_TZ = False
 STATIC_URL = '/static/'
 
 STATICFILES_DIR = [
-    os.path.join(BASE_DIR, 'apps/blog', 'static'),
+    os.path.join(BASE_DIR, 'blogapp', 'static'),
 ]
 
 MEDIA_URL = '/media/'

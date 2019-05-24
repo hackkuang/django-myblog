@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('blog', '0001_initial'),
+        ('blogapp', '0001_initial'),
     ]
 
     operations = [
@@ -89,9 +89,9 @@ class Migration(migrations.Migration):
                 ('views', models.PositiveIntegerField(default=0, verbose_name='浏览量')),
                 ('create_time', models.DateTimeField(auto_now_add=True, verbose_name='创建时间')),
                 ('modi_time', models.DateTimeField(auto_now=True, verbose_name='修改时间')),
-                ('category', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='blog.Category', verbose_name='分类id')),
-                ('recom', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='blog.Recom', verbose_name='推荐位id')),
-                ('tags', models.ManyToManyField(blank=True, to='blog.Tag', verbose_name='标签id')),
+                ('category', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='blogapp.Category', verbose_name='分类id')),
+                ('recom', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='blogapp.Recom', verbose_name='推荐位id')),
+                ('tags', models.ManyToManyField(blank=True, to='blogapp.Tag', verbose_name='标签id')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='作者id')),
             ],
             options={

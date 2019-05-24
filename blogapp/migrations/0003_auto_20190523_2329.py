@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0002_artical_banner_category_link_recom_tag'),
+        ('blogapp', '0002_artical_banner_category_link_recom_tag'),
     ]
 
     operations = [
