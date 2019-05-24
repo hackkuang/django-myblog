@@ -14,14 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blogapp/', include('blogapp.urls'))
 """
 from django.contrib import admin
-from django.contrib.staticfiles.views import serve
-from django.urls import path, include
+from django.urls import path, include, re_path
+from django.views import static
 
 from myblog import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ueditor/', include('extraapps.DjangoUeditor.urls')),      # 添加DjangoUeditor的URL
-    path('media/<str:path>/', serve, {'document_root': settings.MEDIA_ROOT}),
+    re_path('^media/(?P<path>.*)$', static.serve, {'document_root': settings.MEDIA_ROOT}),     # Ueditor富文本上传图片，不支持path新方法！
 
 ]
