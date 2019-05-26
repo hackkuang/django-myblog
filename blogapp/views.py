@@ -24,7 +24,7 @@ class IndexView(View):
         # 热门文章，按浏览量
         hot_articals = Artical.objects.order_by('-views')[:3]
         # 热门推荐，根据推荐字典取R02
-        reco2_articals = Artical.objects.filter(recom__code='R02')[:4]
+        reco2_articals = Artical.objects.filter(recom__code='R02').order_by('-create_time')[:4]
 
         # 所有标签
         tags = Tag.objects.all()
@@ -54,15 +54,16 @@ class ArticalListView(View):
         cates = Category.objects.all()[:5]
 
         # 热门推荐，根据推荐字典取R02
-        reco2_articals = Artical.objects.filter(recom__code='R02')[:4]
+        reco2_articals = Artical.objects.filter(recom__code='R02').order_by('-create_time')[:4]
 
         # 所有标签
         tags = Tag.objects.all()
 
         # 获取文章列表
-        articals = Artical.objects.filter(category__code=catecode).order_by('id')
+        articals = Artical.objects.filter(category__code=catecode).order_by('-create_time')
         # 获取分类
         cate = Category.objects.get(code=catecode)
+
         # 分页
         pn = paginator.Paginator(articals, per_page=2)      # 实例化分页器对象
         page_num = request.GET.get('page')                  # 获取当前页码
@@ -94,7 +95,7 @@ class ArticalDetailView(View):
         cates = Category.objects.all()[:5]
 
         # 热门推荐，根据推荐字典取R02
-        reco2_articals = Artical.objects.filter(recom__code='R02')[:4]
+        reco2_articals = Artical.objects.filter(recom__code='R02').order_by('-create_time')[:4]
 
         # 所有标签
         tags = Tag.objects.all()
@@ -123,13 +124,13 @@ class TagView(View):
         cates = Category.objects.all()[:5]
 
         # 热门推荐，根据推荐字典取R02
-        reco2_articals = Artical.objects.filter(recom__code='R02')[:4]
+        reco2_articals = Artical.objects.filter(recom__code='R02').order_by('-create_time')[:4]
 
         # 所有标签
         tags = Tag.objects.all()
 
         # 根据标签查询文章列表
-        tag_articals = Artical.objects.filter(tags__code=tagcode)
+        tag_articals = Artical.objects.filter(tags__code=tagcode).order_by('-create_time')
         # 获取标签名
         tag_name = Tag.objects.get(code=tagcode)
 
