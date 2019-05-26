@@ -22,7 +22,7 @@ class IndexView(View):
         # 最新文章
         latest_articals = Artical.objects.order_by('-create_time')[:5]
         # 热门文章，按浏览量
-        hot_articals = Artical.objects.order_by('-views')[:3]
+        hot_articals = Artical.objects.order_by('-views')[:5]
         # 热门推荐，根据推荐字典取R02
         reco2_articals = Artical.objects.filter(recom__code='R02').order_by('-create_time')[:4]
 
