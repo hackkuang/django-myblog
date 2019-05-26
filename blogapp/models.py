@@ -61,6 +61,7 @@ class Artical(models.Model):
     category = models.ForeignKey(verbose_name='分类id', to=Category, on_delete=models.DO_NOTHING, blank=True, null=True)
     tags = models.ManyToManyField(verbose_name='标签id', to=Tag, blank=True)
     img = models.ImageField(verbose_name='文章图片', upload_to='artical-img/%Y-%m', blank=True, null=True)
+    excerpt = models.CharField(verbose_name='摘要', max_length=100, blank=True, null=True)
     # Ueditor是百度开发的一个富文本编辑器，功能强大。用富文本编辑body
     body = UEditorField(verbose_name='内容', width=800, height=500, imagePath='up-img/', filePath='up-file/',
                         upload_settings={'imageMaxSize': 1204000}, blank=True, null=True)
