@@ -24,7 +24,7 @@ urlpatterns = [
     # 标签
     path('tag/<str:tagcode>/', TagView.as_view(), name='tag_article_list'),
     # 搜索关键字
-    path('<str:catecode>/search/', SearchView.as_view(), name='search'),
+    path('search/', SearchView.as_view(), name='search'),
 ]
 
 

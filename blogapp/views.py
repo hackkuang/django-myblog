@@ -157,7 +157,7 @@ class SearchView(View):
     按标题或内容关键字搜索文章
     """
 
-    def get(self, request, catecode):
+    def get(self, request):
         # 查询文章分类导航
         cates = Category.objects.all()[:5]
 
