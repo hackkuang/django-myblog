@@ -105,7 +105,7 @@ class ArticalDetailView(View):
         tags = Tag.objects.all()
 
         # 可能感兴趣文章
-        interest_articals = Artical.objects.filter(category__code=catecode).order_by('?')[:5]
+        interest_articals = Artical.objects.filter(category__code=catecode).exclude(pk=pk).order_by('?')[:5]
         # 要显示详情的文章
         this_artical = Artical.objects.get(pk=pk)
         # 上一篇
