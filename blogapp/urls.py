@@ -18,11 +18,13 @@ urlpatterns = [
     # 首页
     path('', IndexView.as_view(), name='index'),
     # 文章分类菜单，显示该分类下所有文章列表
-    path('<str:catecode>/', ArticalListView.as_view(), name='artical_list'),
+    path('<str:catecode>/', ArticalListView.as_view(), name='article_list'),
     # 文章详情
-    path('<str:catecode>/<int:pk>/', ArticalDetailView.as_view(), name='artival_detail'),
+    path('<str:catecode>/<int:pk>/', ArticalDetailView.as_view(), name='article_detail'),
     # 标签
-    path('tag/<str:tagcode>/', TagView.as_view(), name='tag_artical_list'),
+    path('tag/<str:tagcode>/', TagView.as_view(), name='tag_article_list'),
+    # 搜索关键字
+    path('<str:catecode>/search/', SearchView.as_view(), name='search'),
 ]
 
 

@@ -4,13 +4,13 @@
     <div id="main-container" class="container clearfix">
         <section class="post-left">
             <div class="breadcrumb">您的位置： <a itemprop="breadcrumb" href="{% url 'blogapp:index' %}">首页</a> » <a
-                    href="{% url 'blogapp:artical_list' catecode %}">{{ this_artical.category.name }}</a> »
+                    href="{% url 'blogapp:article_list' catecode %}">{{ this_artical.category.name }}</a> »
                 <span class="current">正文</span></div>
             <div class="post-main clearfix">
                 <h1 class="post-title">{{ this_artical.title }}</h1>
                 <div class="post-con clearfix">
                     <div class="article-meta">
-                        <span class="item">分类：<a href="{% url 'blogapp:artical_list' catecode %}"
+                        <span class="item">分类：<a href="{% url 'blogapp:article_list' catecode %}"
                                                  rel="category tag">{{ this_artical.category.name }}</a></span>
                         <span class="item">作者：{{ this_artical.user }}</span>
                         <span class="item">浏览：{{ this_artical.views }}</span>
@@ -23,20 +23,20 @@
 
                     <div class="post-tag"><span class="fa fa-tags" aria-hidden="true"></span>标签：
                         {% for tag in this_artical.tags.all %}
-                            <a href="{% url 'blogapp:tag_artical_list' tag.code %}" rel="tag">{{ tag.name }}</a>
+                            <a href="{% url 'blogapp:tag_article_list' tag.code %}" rel="tag">{{ tag.name }}</a>
                         {% endfor %}
                     </div>
                     <div>
                         <div><b>上一篇：</b>
                             {% if next_artical %}
-                                <a href="{% url 'blogapp:artival_detail' catecode next_artical.pk %}" class="article-tag">{{ next_artical }}</a>
+                                <a href="{% url 'blogapp:article_detail' catecode next_artical.pk %}" class="article-tag">{{ next_artical }}</a>
                             {% else %}
                                 没有了
                             {% endif %}
                         </div>
                         <div><b>下一篇：</b>
                             {% if pre_artical %}
-                                <a href="{% url 'blogapp:artival_detail' catecode pre_artical.pk %}" class="article-tag">{{ pre_artical }}</a>
+                                <a href="{% url 'blogapp:article_detail' catecode pre_artical.pk %}" class="article-tag">{{ pre_artical }}</a>
                             {% else %}
                                 没有了
                             {% endif %}
@@ -55,13 +55,13 @@
                     {% for inte in interest_articals %}
                         <li>
                             <div class="pic">
-                                <a href="{% url 'blogapp:artival_detail' catecode inte.pk %}" title="{{ inte.title }}"><img
+                                <a href="{% url 'blogapp:article_detail' catecode inte.pk %}" title="{{ inte.title }}"><img
                                         src="{{ MEDIA_URL }}{{ inte.img }}"
                                         srcset="{{ MEDIA_URL }}{{ inte.img }}"
                                         alt="{{ inte.title }}" class="wp-post-image" width="145"
                                         height="100"/></a>
                             </div>
-                            <a class="descript " href="{% url 'blogapp:artival_detail' catecode inte.pk %}" rel="bookmark"
+                            <a class="descript " href="{% url 'blogapp:article_detail' catecode inte.pk %}" rel="bookmark"
                                title="{{ inte.title }}">{{ inte.title }}</a>
                         </li>
                     {% endfor %}

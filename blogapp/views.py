@@ -1,4 +1,5 @@
 from django.core import paginator
+from django.db.models import Q
 from django.shortcuts import render
 
 # Create your views here.
@@ -11,7 +12,7 @@ class IndexView(View):
     首页视图
     """
     def get(self, request):
-        # 查询文章分类
+        # 查询文章分类导航
         cates = Category.objects.all()[:5]
 
         # 轮播图
@@ -50,7 +51,7 @@ class ArticalListView(View):
     不同分类的文章列表
     """
     def get(self, request, catecode):
-        # 查询文章分类
+        # 查询文章分类导航
         cates = Category.objects.all()[:5]
 
         # 热门推荐，根据推荐字典取R02
@@ -68,7 +69,7 @@ class ArticalListView(View):
         pn = paginator.Paginator(articals, per_page=2)      # 实例化分页器对象
         page_num = request.GET.get('page')                  # 获取当前页码
         try:
-            page_list_obj = pn.page(page_num)               # 进行分页，返回数量列表（将之传给模板）
+            page_list_obj = pn.page(page_num)               # 进行分页，返回数据列表（将之传给模板）
         except paginator.PageNotAnInteger:
             page_list_obj = pn.page(1)
         except paginator.EmptyPage:
@@ -91,7 +92,7 @@ class ArticalDetailView(View):
     文章详情页
     """
     def get(self, request, catecode, pk):
-        # 查询文章分类
+        # 查询文章分类导航
         cates = Category.objects.all()[:5]
 
         # 热门推荐，根据推荐字典取R02
@@ -120,7 +121,7 @@ class TagView(View):
     按标签显示文章列表
     """
     def get(self, request, tagcode):
-        # 查询文章分类
+        # 查询文章分类导航
         cates = Category.objects.all()[:5]
 
         # 热门推荐，根据推荐字典取R02
@@ -138,15 +139,47 @@ class TagView(View):
         pn = paginator.Paginator(tag_articals, 2)       # 实例化分页器对象
         page_num = request.GET.get('page')              # 获取当前页码
         try:
-            page_list_obj = pn.page(page_num)           # 进行分页，返回数量列表（将之传给模板）
+            page_list_obj = pn.page(page_num)           # 进行分页，返回数据列表（将之传给模板）
         except paginator.PageNotAnInteger:
             page_list_obj = pn.page(1)
         except paginator.EmptyPage:
-            page_list_obj = pn.page(page_num)
+            page_list_obj = pn.page(pn.num_pages)
 
         return render(request=request, template_name='blogapp/tags.html', context=locals())
 
 
+class SearchView(View):
+    """
+    按标题或内容关键字搜索文章
+    """
+    def get(self, request, catecode):
+        # 查询文章分类导航
+        cates = Category.objects.all()[:5]
+
+        # 热门推荐，根据推荐字典取R02
+        reco2_articals = Artical.objects.filter(recom__code='R02').order_by('-create_time')[:4]
+
+        # 所有标签
+        tags = Tag.objects.all()
+
+        # 获取关键字
+        keyword = request.GET.get('keyword', '')
+        if keyword:
+            search_articles = Artical.objects.filter(Q(title__icontains=keyword) | Q(body__icontains=keyword))
+        else:
+            search_articles = Artical.objects.order_by('-create_time')
+
+        # 分页
+        pn = paginator.Paginator(search_articles, 4)        # 实例化分页器对象
+        page_num = request.GET.get('page')                  # 获取当前页码
+        try:
+            page_list_obj = pn.page(page_num)               # 分页，返回数据列表
+        except paginator.PageNotAnInteger:
+            page_list_obj = pn.page(1)
+        except paginator.EmptyPage:
+            page_list_obj = pn.page(pn.num_pages)
+
+        return render(request, template_name='blogapp/search.html', context=locals())
 
 
 
