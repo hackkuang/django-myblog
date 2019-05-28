@@ -36,12 +36,11 @@
                     <li id="menu-item-117720" class="menu-item">
                         <a href="{% url 'blogapp:article_list' cate.code %}">{{ cate.name }}</a></li>
                 {% endfor %}
-                <li id="menu-item-24086" class="menu-item"><a href="">关于博主</a></li>
+                <li id="menu-item-24086" class="menu-item"><a href="{% url 'blogapp:about' %}">关于</a></li>
             </ul>
         </nav>
         <!--搜索栏 通过GET发送请求-->
-        <form method="get" class="index-search  hidden-xs"
-              action="{% url 'blogapp:search' %}">
+        <form method="get" class="index-search  hidden-xs" action="{% url 'blogapp:search' %}">
             <input class="text" name="keyword" type="text" placeholder="输入关键字" value="">
             <button class="submit" type="submit"><i class="fa fa-search"></i></button>
         </form>
@@ -56,7 +55,7 @@
 <footer class="footer">
     <div class="copyright"> © 2019- 2020 · All Rights Reserved
         · <a href="http://www.cnblogs.com/wcwnina/">汪春旺中文网</a>
-        · <a href="http://www.miibeian.gov.cn" target="_blank">湘ICP备17023990号</a> 版权所有 © 汪春旺中文网
+        · <a href="http://www.miibeian.gov.cn" target="_blank">粤ICP备17023990号</a> 版权所有 © 汪春旺中文网
     </div>
 </footer>
 {#<script src="{% static "blogapp/js/bundle.js" %}"></script>#}

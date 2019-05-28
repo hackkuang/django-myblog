@@ -185,3 +185,17 @@ class SearchView(View):
             page_list_obj = pn.page(pn.num_pages)
 
         return render(request, template_name='blogapp/search.html', context=locals())
+
+
+class AboutView(View):
+    """
+    关于博主页
+    """
+
+    def get(self, request):
+        # 查询文章分类导航
+        cates = Category.objects.all()[:5]
+
+        return render(request, template_name='blogapp/about.html', context={'cates': cates})
+
+
