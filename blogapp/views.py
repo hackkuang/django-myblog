@@ -82,7 +82,7 @@ class ArticalListView(View):
             page_list_obj = pn.page(page_num)  # 进行分页，返回数据列表（将之传给模板）
         except paginator.PageNotAnInteger:
             page_list_obj = pn.page(1)
-        except paginator.EmptyPage:
+        except paginator.InvalidPage:
             page_list_obj = pn.page(pn.num_pages)
 
         context = {
@@ -152,7 +152,7 @@ class TagView(View):
             page_list_obj = pn.page(page_num)  # 进行分页，返回数据列表（将之传给模板）
         except paginator.PageNotAnInteger:
             page_list_obj = pn.page(1)
-        except paginator.EmptyPage:
+        except paginator.InvalidPage:
             page_list_obj = pn.page(pn.num_pages)
         context = locals()
         context.update(get_globalvars(request))
@@ -186,7 +186,7 @@ class SearchView(View):
             page_list_obj = pn.page(page_num)  # 分页，返回数据列表
         except paginator.PageNotAnInteger:
             page_list_obj = pn.page(1)
-        except paginator.EmptyPage:
+        except paginator.InvalidPage:
             page_list_obj = pn.page(pn.num_pages)
         context = locals()
         context.update(get_globalvars(request))
