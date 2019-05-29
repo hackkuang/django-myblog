@@ -18,7 +18,7 @@ urlpatterns = [
     # 首页
     path('', IndexView.as_view(), name='index'),
 
-    # 文章分类菜单，显示该分类下所有文章列表
+    # 文章分类菜单，显示该分类下所有文章列表。需注意url冲突。
     path('<str:catecode>-list/', ArticalListView.as_view(), name='article_list'),
     # 文章详情
     path('<str:catecode>/<int:pk>/', ArticalDetailView.as_view(), name='article_detail'),
