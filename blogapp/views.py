@@ -7,14 +7,28 @@ from django.views.generic.base import View
 from blogapp.models import *
 
 
+def get_globalvars(request):
+    # 查询文章分类导航
+    cates = Category.objects.all()[:5]
+    # 热门推荐，根据推荐字典取R02
+    reco2_articals = Artical.objects.filter(recom__code='R02').order_by('-create_time')[:4]
+    # 所有标签
+    tags = Tag.objects.all()
+    return locals()
+
+
 class IndexView(View):
     """
     首页视图
     """
 
     def get(self, request):
-        # 查询文章分类导航
-        cates = Category.objects.all()[:5]
+        # # 查询文章分类导航
+        # cates = Category.objects.all()[:5]
+        # # 热门推荐，根据推荐字典取R02
+        # reco2_articals = Artical.objects.filter(recom__code='R02').order_by('-create_time')[:4]
+        # # 所有标签
+        # tags = Tag.objects.all()
 
         # 轮播图
         banners = Banner.objects.filter(is_active=True)[:4]
@@ -25,25 +39,21 @@ class IndexView(View):
         latest_articals = Artical.objects.order_by('-create_time')[:5]
         # 热门文章，按浏览量
         hot_articals = Artical.objects.order_by('-views')[:5]
-        # 热门推荐，根据推荐字典取R02
-        reco2_articals = Artical.objects.filter(recom__code='R02').order_by('-create_time')[:4]
-
-        # 所有标签
-        tags = Tag.objects.all()
 
         # 友情链接
         links = Link.objects.all()
 
         context = {
-            'cates': cates,
+            # 'cates': cates,
             'banners': banners,
             'reco_articals': reco_articals,
             'latest_articals': latest_articals,
             'hot_articals': hot_articals,
-            'reco2_articals': reco2_articals,
-            'tags': tags,
+            # 'reco2_articals': reco2_articals,
+            # 'tags': tags,
             'links': links,
         }
+        context.update(get_globalvars(request))
         return render(request=request, template_name='blogapp/index.html', context=context)
 
 
@@ -53,14 +63,12 @@ class ArticalListView(View):
     """
 
     def get(self, request, catecode):
-        # 查询文章分类导航
-        cates = Category.objects.all()[:5]
-
-        # 热门推荐，根据推荐字典取R02
-        reco2_articals = Artical.objects.filter(recom__code='R02').order_by('-create_time')[:4]
-
-        # 所有标签
-        tags = Tag.objects.all()
+        # # 查询文章分类导航
+        # cates = Category.objects.all()[:5]
+        # # 热门推荐，根据推荐字典取R02
+        # reco2_articals = Artical.objects.filter(recom__code='R02').order_by('-create_time')[:4]
+        # # 所有标签
+        # tags = Tag.objects.all()
 
         # 获取文章列表
         articals = Artical.objects.filter(category__code=catecode).order_by('-create_time')
@@ -80,11 +88,12 @@ class ArticalListView(View):
         context = {
             'cate': cate,
             'page_list_obj': page_list_obj,
-            'reco2_articals': reco2_articals,
-            'tags': tags,
-            'cates': cates,
+            # 'reco2_articals': reco2_articals,
+            # 'tags': tags,
+            # 'cates': cates,
             'catecode': catecode,
         }
+        context.update(get_globalvars(request))
 
         return render(request=request, template_name='blogapp/list.html', context=context)
 
@@ -95,14 +104,12 @@ class ArticalDetailView(View):
     """
 
     def get(self, request, catecode, pk):
-        # 查询文章分类导航
-        cates = Category.objects.all()[:5]
-
-        # 热门推荐，根据推荐字典取R02
-        reco2_articals = Artical.objects.filter(recom__code='R02').order_by('-create_time')[:4]
-
-        # 所有标签
-        tags = Tag.objects.all()
+        # # 查询文章分类导航
+        # cates = Category.objects.all()[:5]
+        # # 热门推荐，根据推荐字典取R02
+        # reco2_articals = Artical.objects.filter(recom__code='R02').order_by('-create_time')[:4]
+        # # 所有标签
+        # tags = Tag.objects.all()
 
         # 可能感兴趣文章
         interest_articals = Artical.objects.filter(category__code=catecode).exclude(pk=pk).order_by('?')[:5]
@@ -115,8 +122,9 @@ class ArticalDetailView(View):
         # 浏览量+1
         this_artical.views += 1
         this_artical.save()
-
-        return render(request=request, template_name='blogapp/show.html', context=locals())
+        context = locals()
+        context.update(get_globalvars(request))
+        return render(request=request, template_name='blogapp/show.html', context=context)
 
 
 class TagView(View):
@@ -125,14 +133,12 @@ class TagView(View):
     """
 
     def get(self, request, tagcode):
-        # 查询文章分类导航
-        cates = Category.objects.all()[:5]
-
-        # 热门推荐，根据推荐字典取R02
-        reco2_articals = Artical.objects.filter(recom__code='R02').order_by('-create_time')[:4]
-
-        # 所有标签
-        tags = Tag.objects.all()
+        # # 查询文章分类导航
+        # cates = Category.objects.all()[:5]
+        # # 热门推荐，根据推荐字典取R02
+        # reco2_articals = Artical.objects.filter(recom__code='R02').order_by('-create_time')[:4]
+        # # 所有标签
+        # tags = Tag.objects.all()
 
         # 根据标签查询文章列表
         tag_articals = Artical.objects.filter(tags__code=tagcode).order_by('-create_time')
@@ -148,8 +154,9 @@ class TagView(View):
             page_list_obj = pn.page(1)
         except paginator.EmptyPage:
             page_list_obj = pn.page(pn.num_pages)
-
-        return render(request=request, template_name='blogapp/tags.html', context=locals())
+        context = locals()
+        context.update(get_globalvars(request))
+        return render(request=request, template_name='blogapp/tags.html', context=context)
 
 
 class SearchView(View):
@@ -158,14 +165,12 @@ class SearchView(View):
     """
 
     def get(self, request):
-        # 查询文章分类导航
-        cates = Category.objects.all()[:5]
-
-        # 热门推荐，根据推荐字典取R02
-        reco2_articals = Artical.objects.filter(recom__code='R02').order_by('-create_time')[:4]
-
-        # 所有标签
-        tags = Tag.objects.all()
+        # # 查询文章分类导航
+        # cates = Category.objects.all()[:5]
+        # # 热门推荐，根据推荐字典取R02
+        # reco2_articals = Artical.objects.filter(recom__code='R02').order_by('-create_time')[:4]
+        # # 所有标签
+        # tags = Tag.objects.all()
 
         # 获取关键字
         keyword = request.GET.get('keyword', '')
@@ -183,8 +188,9 @@ class SearchView(View):
             page_list_obj = pn.page(1)
         except paginator.EmptyPage:
             page_list_obj = pn.page(pn.num_pages)
-
-        return render(request, template_name='blogapp/search.html', context=locals())
+        context = locals()
+        context.update(get_globalvars(request))
+        return render(request, template_name='blogapp/search.html', context=context)
 
 
 class AboutView(View):
@@ -197,5 +203,3 @@ class AboutView(View):
         cates = Category.objects.all()[:5]
 
         return render(request, template_name='blogapp/about.html', context={'cates': cates})
-
-

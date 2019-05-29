@@ -67,6 +67,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                # 'blogapp.views.get_globalvars',   # 提供给视图共有的属性
             ],
         },
     },
