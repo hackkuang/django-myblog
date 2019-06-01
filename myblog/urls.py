@@ -20,8 +20,8 @@ from django.views import static
 from myblog import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('ueditor/', include('extraapps.DjangoUeditor.urls')),      # 添加DjangoUeditor的URL
+    path('admin', admin.site.urls),
+    path('ueditor', include('extraapps.DjangoUeditor.urls')),      # 添加DjangoUeditor的URL
     re_path('^media/(?P<path>.*)$', static.serve, {'document_root': settings.MEDIA_ROOT}),     # Ueditor富文本上传图片，不支持path新方法！
 
     # blogapp URL

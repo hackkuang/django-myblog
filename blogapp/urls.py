@@ -19,15 +19,15 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
 
     # 文章分类菜单，显示该分类下所有文章列表。需注意url冲突。
-    path('<str:catecode>-list/', ArticalListView.as_view(), name='article_list'),
+    path('<str:catecode>-list', ArticalListView.as_view(), name='article_list'),
     # 文章详情
-    path('<str:catecode>/<int:pk>/', ArticalDetailView.as_view(), name='article_detail'),
+    path('<str:catecode>/<int:pk>', ArticalDetailView.as_view(), name='article_detail'),
     # 标签
-    path('tag/<str:tagcode>-list/', TagView.as_view(), name='tag_article_list'),
+    path('tag/<str:tagcode>-list', TagView.as_view(), name='tag_article_list'),
     # 搜索关键字
-    path('search/', SearchView.as_view(), name='search'),
+    path('search', SearchView.as_view(), name='search'),
     # 关于博主
-    path('about/', AboutView.as_view(), name='about'),
+    path('about', AboutView.as_view(), name='about'),
 
 ]
 
