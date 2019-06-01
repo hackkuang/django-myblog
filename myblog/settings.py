@@ -25,9 +25,9 @@ sys.path.append(os.path.join(BASE_DIR, 'extraapps'))
 SECRET_KEY = 'lxt3sr_4m#f60m@)8+u01pji9(6mtw8!5@fjuo0c5t5r%zc+ti'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -124,11 +124,13 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+# 生产收集静态文件
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # 多个App的静态文件配置
-STATICFILES_DIR = [
-    os.path.join(BASE_DIR, 'blogapp', 'static'),
-]
+# STATICFILES_DIR = [
+#     os.path.join(BASE_DIR, 'blogapp', 'static'),
+# ]
 
 # 上传文件配置
 MEDIA_URL = '/media/'
