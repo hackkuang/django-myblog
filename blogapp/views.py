@@ -195,7 +195,7 @@ class SearchView(View):
 
 class AboutView(View):
     """
-    关于博主页
+    关于页
     """
 
     def get(self, request):
